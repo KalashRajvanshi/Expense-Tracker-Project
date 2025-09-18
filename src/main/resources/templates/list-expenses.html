@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>My Expenses</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+
+<h2>My Expenses</h2>
+
+<!-- Add new expense button -->
+<a th:href="@{/expenses/add}">
+    <button type="button">Add New Expense</button>
+</a>
+
+<br><br>
+
+<!-- Expense table -->
+<table border="1" cellpadding="10">
+    <thead>
+    <tr>
+        <th>Description</th>
+        <th>Amount</th>
+        <th>Category</th>
+        <th>Date</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Thymeleaf loop -->
+    <tr th:each="expense : ${expenses}">
+        <td th:text="${expense.description}"></td>
+        <td th:text="${expense.amount}"></td>
+        <td th:text="${expense.category}"></td>
+        <td th:text="${expense.date}"></td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
