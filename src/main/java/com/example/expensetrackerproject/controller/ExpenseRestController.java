@@ -1,5 +1,6 @@
 package com.example.expensetrackerproject.controller;
 
+import com.example.expensetrackerproject.DTO.ModeOfPaymentReport;
 import com.example.expensetrackerproject.model.Expense;
 import com.example.expensetrackerproject.service.ExpenseService;
 import lombok.RequiredArgsConstructor;
@@ -7,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 
 @RestController
@@ -35,6 +37,19 @@ public class ExpenseRestController {
     public List<Expense> saveExpense(@RequestBody Expense expense) {
         expenseService.addExpense(expense);
         return expenseService.getAllExpensesForSpecificUser(); // after saving → go back to list
+    }
+
+    @GetMapping("/spendbymodeofpayment")
+    public List<ModeOfPaymentReport> getTotalSpendByModeOfPayment() {
+        return expenseService.ReportModeOfPayment();
+//            List<Expense> list = expenseService.getAllExpensesForSpecificUser();
+//            HashMap<String,Long> map = new HashMap<>();
+//            for(Expense e : list) {
+//                String mode = e.getModeOfPayment();
+//                Long amount = e.getAmount().longValue();
+//                map.put(mode, map.getOrDefault(mode, 0L) + amount);
+//                }
+//            return map;
     }
 
 

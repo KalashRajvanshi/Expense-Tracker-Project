@@ -17,11 +17,12 @@ public class Expense {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     private Long id;
-    
+
     private  String description;
     private Double amount;
     private String category;
     private LocalDate date;
+    private String modeOfPayment;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)

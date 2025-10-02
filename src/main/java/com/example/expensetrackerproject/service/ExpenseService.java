@@ -1,5 +1,6 @@
 package com.example.expensetrackerproject.service;
 
+import com.example.expensetrackerproject.DTO.ModeOfPaymentReport;
 import com.example.expensetrackerproject.model.Expense;
 import com.example.expensetrackerproject.model.Users;
 import com.example.expensetrackerproject.repository.ExpenseRepository;
@@ -38,7 +39,6 @@ public class ExpenseService {
 
     public List<Expense> getAllExpensesForSpecificUser() {
         // Logic to retrieve all expenses for a specific user
-
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username = auth.getName();
 
@@ -57,6 +57,25 @@ public class ExpenseService {
         // Fetch expenses for the user
         // return expenseRepository.findByUser(user);
         return listexpenses;
-
     }
+
+
+    public List<ModeOfPaymentReport> ReportModeOfPayment(){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName();
+
+        System.out.println("Fetching report for username: " + username);
+
+        if(username == null) {
+            System.out.println("Username is null, cannot fetch expenses.");
+            return null;
+        }
+
+        long userId = usersRepository.findByUsername(username).getId();
+        System.out.println("Fetching report for userID: " + userId);
+        return expenseRepository.SpendByModeOfPayment(userId);
+    }
+
+
+
 }
